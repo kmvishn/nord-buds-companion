@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Nord Buds
+GenericName=Earbuds companion
+Comment=Battery, sound profile, game mode and touch controls for OnePlus Nord Buds 2r
+Exec=@NORDBUDS_BIN@
+Icon=audio-headphones
+Terminal=false
+Categories=AudioVideo;Audio;Settings;
+Keywords=earbuds;headphones;oneplus;bluetooth;battery;
+StartupNotify=true

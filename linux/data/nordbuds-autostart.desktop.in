@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Nord Buds (background)
+Comment=Top-bar indicator for OnePlus Nord Buds 2r
+Exec=@NORDBUDS_BIN@ --background
+Icon=audio-headphones
+Terminal=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true

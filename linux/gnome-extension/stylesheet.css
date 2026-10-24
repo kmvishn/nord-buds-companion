@@ -1,0 +1,61 @@
+.nordbuds-panel-label {
+  padding-left: 4px;
+}
+
+.nordbuds-battery {
+  spacing: 8px;
+  padding: 6px 0 2px 0;
+}
+
+.nordbuds-col {
+  spacing: 3px;
+  min-width: 80px;
+}
+
+.nordbuds-name {
+  font-weight: bold;
+  font-size: 0.9em;
+  padding-top: 4px;
+}
+
+.nordbuds-note {
+  font-size: 0.8em;
+  color: rgba(128, 128, 128, 1);
+}
+
+.nordbuds-note.charging {
+  color: #62a0ea;
+  font-weight: bold;
+}
+
+.nordbuds-note.low {
+  color: #f66151;
+  font-weight: bold;
+}
+
+.nordbuds-value {
+  font-weight: 800;
+  font-size: 1.05em;
+}
+
+.nordbuds-eq-row {
+  spacing: 6px;
+}
+
+.nordbuds-eq {
+  border-radius: 12px;
+  padding: 7px 0;
+  font-weight: bold;
+  background-color: rgba(128, 128, 128, 0.14);
+  transition-duration: 150ms;
+}
+
+.nordbuds-eq:hover,
+.nordbuds-eq:focus {
+  background-color: rgba(128, 128, 128, 0.26);
+}
+
+.nordbuds-eq:checked {
+  background-color: rgba(128, 128, 128, 0.5);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+}
