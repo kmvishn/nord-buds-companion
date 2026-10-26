@@ -93,6 +93,7 @@ Buds::Buds(std::string preferred_address) : preferred_(std::move(preferred_addre
 Buds::~Buds() {
     close_link();
     if (retry_id_) g_source_remove(retry_id_);
+    if (start_retry_id_) g_source_remove(start_retry_id_);
     if (device_) g_object_unref(device_);
     if (manager_) g_object_unref(manager_);
 }
@@ -108,15 +109,32 @@ void Buds::fail(const std::string& message) {
 
 void Buds::start() {
     GError* err = nullptr;
+    // DO_NOT_AUTO_START: if BlueZ is not up yet (app started first at login), the manager still comes up,
+    // empty, and fills in by itself when BlueZ appears; name-owner below tracks it going and coming back.
     manager_ = g_dbus_object_manager_client_new_for_bus_sync(
-        G_BUS_TYPE_SYSTEM, G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE, "org.bluez", "/",
+        G_BUS_TYPE_SYSTEM, G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_DO_NOT_AUTO_START, "org.bluez", "/",
         nullptr, nullptr, nullptr, nullptr, &err);
     if (!manager_) {
+        // Only when the system bus itself is unreachable; try again shortly.
         fail(std::string("Bluetooth service unavailable: ") + err->message);
         g_error_free(err);
+        st_.bluetooth = false;
+        start_retry_id_ = g_timeout_add_seconds(5,
+                                                +[](gpointer data) -> gboolean {
+                                                    auto* self = static_cast<Buds*>(data);
+                                                    self->start_retry_id_ = 0;
+                                                    self->start();
+                                                    return G_SOURCE_REMOVE;
+                                                },
+                                                this);
         notify();
         return;
     }
+    g_signal_connect(manager_, "notify::name-owner",
+                     G_CALLBACK(+[](GObject*, GParamSpec*, gpointer self) {
+                         static_cast<Buds*>(self)->on_bluez_owner();
+                     }),
+                     this);
     g_signal_connect(manager_, "object-added",
                      G_CALLBACK(+[](GDBusObjectManager*, GDBusObject*, gpointer self) {
                          static_cast<Buds*>(self)->pick_device();
@@ -145,6 +163,23 @@ void Buds::start() {
                          }
                      }),
                      this);
+    on_bluez_owner();
+}
+
+void Buds::on_bluez_owner() {
+    gchar* owner = g_dbus_object_manager_client_get_name_owner(G_DBUS_OBJECT_MANAGER_CLIENT(manager_));
+    st_.bluetooth = owner != nullptr;
+    g_free(owner);
+    if (!st_.bluetooth) {
+        // BlueZ stopped or restarted: every device proxy and socket is stale.
+        close_link();
+        if (retry_id_) {
+            g_source_remove(retry_id_);
+            retry_id_ = 0;
+        }
+        retries_ = 0;
+        g_clear_object(&device_);
+    }
     pick_device();
 }
 

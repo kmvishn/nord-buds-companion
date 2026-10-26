@@ -277,6 +277,8 @@ void Indicator::build_items() {
         add(kLeftId, {0, battery_line("Left", st.battery.left, "not reported"), false});
         add(kRightId, {0, battery_line("Right", st.battery.right, "not reported"), false});
         add(kCaseId, {0, battery_line("Case", st.battery.box, "open the lid to read"), false});
+    } else if (!st.bluetooth) {
+        add(kStatusId, {0, "Bluetooth is off", false});
     } else if (st.link == LinkState::NoDevice) {
         add(kStatusId, {0, "No paired Nord Buds found", false});
     } else if (st.bt_connected) {

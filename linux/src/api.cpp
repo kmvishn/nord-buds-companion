@@ -77,6 +77,7 @@ GVariant* ServiceApi::state() const {
     add("link", g_variant_new_string(link_key(st.link)));
     add("ready", g_variant_new_boolean(ready));
     add("bt-connected", g_variant_new_boolean(st.bt_connected));
+    add("bluetooth", g_variant_new_boolean(st.bluetooth));
     add("name", g_variant_new_string(st.name.c_str()));
     add("left", g_variant_new_int32(ready ? st.battery.left.level : -1));
     add("right", g_variant_new_int32(ready ? st.battery.right.level : -1));

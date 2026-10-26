@@ -156,6 +156,7 @@ std::string touch_text(const BudsState& st) {
 
 std::string link_text(const Buds& buds) {
     const auto& st = buds.state();
+    if (!st.bluetooth) return "Bluetooth is off";
     switch (st.link) {
     case LinkState::NoDevice: return "no paired Nord Buds found";
     case LinkState::Disconnected: return "not connected";
@@ -175,6 +176,11 @@ std::string not_ready_message() {
 // Waits for the control channel, then runs fn. Fails fast when Bluetooth is not connected.
 void with_buds(GApplicationCommandLine* cl, std::function<int(GApplicationCommandLine*)> fn) {
     const auto& st = app.buds->state();
+    if (!st.bluetooth) {
+        print_error(cl, "Bluetooth is off (the bluetooth service is not running)");
+        finish(cl, 1);
+        return;
+    }
     if (st.link == LinkState::NoDevice) {
         print_error(cl, "no paired OnePlus Nord Buds found. Pair them in Settings → Bluetooth.");
         finish(cl, 1);

@@ -245,6 +245,7 @@ void draw_eq_curve(GtkDrawingArea* area, cairo_t* cr, int w, int h, gpointer dat
 
 std::string status_text(const Buds& buds) {
     const auto& st = buds.state();
+    if (!st.bluetooth) return "Bluetooth is off";
     switch (st.link) {
     case LinkState::NoDevice: return "No earbuds paired";
     case LinkState::Disconnected: return "Not connected";
@@ -686,7 +687,10 @@ void MainWindow::refresh() {
     else gtk_widget_add_css_class(connect_button_, "suggested-action");
 
     gtk_stack_set_visible_child_name(GTK_STACK(hero_stack_), ready ? "meters" : "empty");
-    if (st.link == LinkState::NoDevice) {
+    if (!st.bluetooth) {
+        gtk_label_set_text(GTK_LABEL(empty_title_), "Bluetooth is off");
+        gtk_label_set_text(GTK_LABEL(empty_body_), "Nord Buds will connect by itself\nonce Bluetooth is back on.");
+    } else if (st.link == LinkState::NoDevice) {
         gtk_label_set_text(GTK_LABEL(empty_title_), "No earbuds paired");
         gtk_label_set_text(GTK_LABEL(empty_body_), "Pair your OnePlus Nord Buds in\nSettings → Bluetooth first.");
     } else if (busy) {

@@ -2,6 +2,6 @@
   "uuid": "nordbuds@nordbuds.local",
   "name": "Nord Buds",
   "description": "Top-bar battery and quick controls for OnePlus Nord Buds 2r. Needs the nordbuds companion app running.",
-  "shell-version": ["45", "46", "47", "48"],
+  "shell-version": ["45", "46", "47", "48", "49", "50"],
   "version": 1
 }

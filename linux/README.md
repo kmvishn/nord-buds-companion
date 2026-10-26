@@ -38,7 +38,7 @@ Written in C++20 with GTK 4. No extra Bluetooth libraries are needed.
 
 ## Requirements
 
-- Ubuntu 24.04 or another Linux with GNOME 45–48 (tested on GNOME 46, Wayland)
+- Ubuntu 24.04 or another Linux with GNOME 45–50 (tested on GNOME 46, Wayland)
 - BlueZ (the normal Linux Bluetooth stack)
 - Build tools: `cmake`, `g++` (C++20), `pkg-config`, `libgtk-4-dev`
 

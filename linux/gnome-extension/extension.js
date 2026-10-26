@@ -185,6 +185,8 @@ class NordBudsIndicator extends PanelMenu.Button {
         let title;
         if (!s)
             title = 'Nord Buds is not running';
+        else if (s.bluetooth === false)
+            title = 'Bluetooth is off';
         else if (s.link === 'no-device')
             title = 'No paired Nord Buds found';
         else if (!s['bt-connected'])

@@ -16,6 +16,7 @@ struct BudsState {
     LinkState link = LinkState::NoDevice;
     std::string name;
     std::string address;
+    bool bluetooth = true;      // the BlueZ service is running
     bool bt_connected = false;  // Bluetooth audio link, as BlueZ reports it
     bool initialized = false;   // control channel open and settings read
     proto::Battery battery;
@@ -54,6 +55,7 @@ private:
     void notify();
     void fail(const std::string& message);
     void pick_device();
+    void on_bluez_owner();
     void sync_device();
     void start_connect();
     void on_connect_done(GAsyncResult* res);
@@ -97,6 +99,7 @@ private:
     guint watch_id_ = 0;
     guint pump_id_ = 0;
     guint retry_id_ = 0;
+    guint start_retry_id_ = 0;
     guint init_timeout_id_ = 0;
     guint poll_id_ = 0;
     guint find_stop_id_ = 0;
