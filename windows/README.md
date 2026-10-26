@@ -24,7 +24,7 @@ C++20, plain Win32 + Direct2D. No runtime or DLLs to install: one `nordbuds.exe`
 
 ```bash
 sudo apt install cmake g++-mingw-w64-x86-64
-cd ~/Documents/nordbuds-companion/windows
+cd nord-buds-companion/windows
 cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=cmake/mingw-w64.cmake
 cmake --build build -j
 ```
@@ -132,7 +132,7 @@ Windows. If something does not work, `nordbuds status` shows the last error.
 ## Project layout
 
 ```
-nordbuds-companion/windows/
+nord-buds-companion/windows/
 ├── CMakeLists.txt
 ├── cmake/mingw-w64.cmake  cross-compile toolchain
 ├── res/                   app icon (.svg, .ico), manifest, resource script

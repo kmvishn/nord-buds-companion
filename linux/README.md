@@ -51,7 +51,8 @@ The earbuds must already be **paired** in *Settings → Bluetooth*.
 ## Build and install
 
 ```bash
-cd ~/Documents/nordbuds-companion/linux
+git clone git@github.com:kmvishn/nord-buds-companion.git
+cd nord-buds-companion/linux
 cmake -S . -B build -DCMAKE_INSTALL_PREFIX=$HOME/.local
 cmake --build build -j
 cmake --install build
@@ -302,7 +303,7 @@ rm -rf ~/.local/share/gnome-shell/extensions/nordbuds@nordbuds.local \
 ## Project layout
 
 ```
-nordbuds-companion/linux/
+nord-buds-companion/linux/
 ├── CMakeLists.txt
 ├── README.md
 ├── src/
