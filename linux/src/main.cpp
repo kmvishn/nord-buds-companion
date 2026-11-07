@@ -493,6 +493,13 @@ int on_command_line(GApplication*, GApplicationCommandLine* cl, gpointer) {
 }  // namespace
 
 int main(int argc, char** argv) {
+    for (int i = 1; i < argc; i++) {
+        std::string a = argv[i];
+        if (a == "--help" || a == "-h" || a == "help") {
+            std::fputs(kUsage, stdout);
+            return 0;
+        }
+    }
     app.gtk = gtk_application_new(kAppId, G_APPLICATION_HANDLES_COMMAND_LINE);
     g_signal_connect(app.gtk, "command-line", G_CALLBACK(on_command_line), nullptr);
     int status = g_application_run(G_APPLICATION(app.gtk), argc, argv);

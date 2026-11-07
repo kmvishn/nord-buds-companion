@@ -48,7 +48,18 @@ sudo apt install cmake g++ pkg-config libgtk-4-dev
 
 The earbuds must already be **paired** in *Settings → Bluetooth*.
 
-## Build and install
+## Install
+
+### Using the Debian / Ubuntu package (.deb) (recommended)
+
+Download the `.deb` package from the [Releases](https://github.com/kmvishn/nord-buds-companion/releases) page:
+
+```bash
+sudo dpkg -i nordbuds_1.0.0_amd64.deb
+sudo apt-get install -f # if any dependencies need resolving
+```
+
+### Build and install from source
 
 ```bash
 git clone git@github.com:kmvishn/nord-buds-companion.git
@@ -56,6 +67,14 @@ cd nord-buds-companion/linux
 cmake -S . -B build -DCMAKE_INSTALL_PREFIX=$HOME/.local
 cmake --build build -j
 cmake --install build
+```
+
+To build a `.deb` package yourself:
+
+```bash
+cmake -S . -B build -DCMAKE_INSTALL_PREFIX=/usr
+cmake --build build -j
+cpack --config build/CPackConfig.cmake
 ```
 
 This installs, all inside your home folder:

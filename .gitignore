@@ -1,2 +1,5 @@
 build/
 backup/
+dist/
+_CPack_Packages/
+linux/_CPack_Packages/

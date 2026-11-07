@@ -34,14 +34,31 @@ Windows PC.
 
 ### On Windows
 
-With Visual Studio 2022 (Desktop C++) or MSYS2 MinGW, from a developer prompt:
+With Visual Studio 2022 (Desktop C++) or MinGW (WinLibs / MSYS2), from a developer prompt or PowerShell:
 
 ```bat
 cmake -S . -B build
 cmake --build build --config Release
 ```
 
+To create the standalone Windows installer executable (`dist/NordBuds-Setup.exe` via Inno Setup):
+
+```bat
+cmake --build build --target installer
+```
+
 ## Install
+
+### Using the setup installer (recommended)
+
+1. Pair the earbuds in **Settings → Bluetooth & devices** first.
+2. Run `dist/NordBuds-Setup.exe`.
+   - Installs to `%LOCALAPPDATA%\NordBuds` cleanly without requiring administrator privileges.
+   - Adds a **Nord Buds** shortcut with its icon to your Start Menu.
+   - Registers in Windows **Settings → Installed apps** with a clean uninstaller.
+   - Offers options to create a Desktop shortcut, add to user `PATH` (for global `nordbuds` CLI commands), and start automatically with Windows.
+
+### Manual install
 
 1. Pair the earbuds in **Settings → Bluetooth & devices** first.
 2. Put `nordbuds.exe` and `nordbuds.com` in a folder of their own, e.g. `%LOCALAPPDATA%\NordBuds`.

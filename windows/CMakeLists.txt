@@ -44,3 +44,17 @@ set_target_properties(nordbuds-cli PROPERTIES OUTPUT_NAME nordbuds SUFFIX .com)
 target_link_libraries(nordbuds-cli PRIVATE user32 shell32)
 
 install(TARGETS nordbuds nordbuds-cli DESTINATION .)
+
+find_program(INNO_COMPILER iscc PATHS
+    "$ENV{LOCALAPPDATA}/Programs/Inno Setup 6"
+    "$ENV{ProgramFiles\(x86\)}/Inno Setup 6"
+    "$ENV{ProgramFiles}/Inno Setup 6"
+)
+if(INNO_COMPILER)
+    add_custom_target(installer
+        COMMAND ${INNO_COMPILER} "${CMAKE_CURRENT_SOURCE_DIR}/installer.iss"
+        DEPENDS nordbuds nordbuds-cli
+        WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+        COMMENT "Building Inno Setup installer executable"
+    )
+endif()
