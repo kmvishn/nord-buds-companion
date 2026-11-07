@@ -33,6 +33,16 @@ public:
     void paint(ID2D1RenderTarget* rt, float width, float height);
     float content_height(float width) const;
 
+#ifdef NORDBUDS_TEST_HOOKS
+    void finish_animations() {
+        for (auto& g : gauges_) {
+            if (g.level >= 0) g.shown = float(g.level);
+            g.animating = false;
+        }
+    }
+    void set_theme(const gfx::Theme& t) { theme_ = t; }
+#endif
+
 private:
     enum Hit : int { kNone = 0, kConnect, kMore, kGame, kSideLeft, kSideRight, kFind, kEq = 100, kGesture = 200 };
 

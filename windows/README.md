@@ -15,6 +15,10 @@ The Windows port of the Linux app in `../linux/`: battery, sound and touch setti
 - **Command line**: everything above from a terminal
 - Light and dark mode and the Windows accent colour, sharp at any display scale
 
+<p align="center">
+  <img src="../docs/screenshots/windows-connected-dark.png" width="380" alt="Nord Buds Windows App" />
+</p>
+
 C++20, plain Win32 + Direct2D. No runtime or DLLs to install: one `nordbuds.exe` plus the small
 `nordbuds.com` command line tool.
 

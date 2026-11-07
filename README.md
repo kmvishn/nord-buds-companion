@@ -23,6 +23,16 @@ A native, zero-runtime desktop companion suite and CLI for the **OnePlus Nord Bu
 
 ---
 
+## Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/windows-connected-dark.png" width="45%" alt="Nord Buds Companion - Dark Mode" />
+  &nbsp; &nbsp;
+  <img src="docs/screenshots/windows-connected-light.png" width="45%" alt="Nord Buds Companion - Light Mode" />
+</p>
+
+---
+
 ## Downloads
 
 Download the latest installer or package from the **[Releases](https://github.com/kmvishn/nord-buds-companion/releases/latest)** page:

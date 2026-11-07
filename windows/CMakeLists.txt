@@ -43,6 +43,23 @@ add_executable(nordbuds-cli src/cli.cpp src/util.cpp ${RESOURCES})
 set_target_properties(nordbuds-cli PROPERTIES OUTPUT_NAME nordbuds SUFFIX .com)
 target_link_libraries(nordbuds-cli PRIVATE user32 shell32)
 
+# Screenshot generator tool
+add_executable(render_screenshot EXCLUDE_FROM_ALL
+    ../tools/render_screenshot.cpp
+    src/buds.cpp
+    src/bluetooth.cpp
+    src/protocol.cpp
+    src/model.cpp
+    src/window.cpp
+    src/tray.cpp
+    src/gfx.cpp
+    src/settings.cpp
+    src/util.cpp
+    ${RESOURCES}
+)
+target_compile_definitions(render_screenshot PRIVATE NORDBUDS_TEST_HOOKS)
+target_link_libraries(render_screenshot PRIVATE ws2_32 bthprops d2d1 dwrite windowscodecs dwmapi ole32 uuid shell32 user32 gdi32 advapi32)
+
 install(TARGETS nordbuds nordbuds-cli DESTINATION .)
 
 find_program(INNO_COMPILER iscc PATHS

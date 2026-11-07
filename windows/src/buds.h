@@ -59,6 +59,13 @@ public:
     void bluetooth_connect();
     void bluetooth_disconnect();
 
+#ifdef NORDBUDS_TEST_HOOKS
+    void set_test_state(const BudsState& st) {
+        st_ = st;
+        if (!link_) link_ = std::make_shared<Link>();
+    }
+#endif
+
 private:
     // The socket, shared with its reader thread. The reader closes it; the UI thread only shuts it down.
     struct Link {
