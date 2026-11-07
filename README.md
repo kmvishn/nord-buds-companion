@@ -1,6 +1,6 @@
 # Nord Buds Companion
 
-[![Latest Release](https://img.shields.io/github/v/release/kmvishn/nord-buds-companion?color=blue&logo=github)](https://github.com/kmvishn/nord-buds-companion/releases)
+[![Latest Release](https://img.shields.io/badge/release-v1.0.0-blue?logo=github)](https://github.com/kmvishn/nord-buds-companion/releases)
 [![C++20](https://img.shields.io/badge/C%2B%2B-20-blue.svg?logo=c%2B%2B)](https://en.wikipedia.org/wiki/C%2B%2B20)
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows-lightgrey)](https://github.com/kmvishn/nord-buds-companion)
 
